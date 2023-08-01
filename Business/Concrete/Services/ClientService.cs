@@ -35,6 +35,11 @@ namespace Business.Concrete.Services
             return _clients.FirstOrDefault(c => c.Id.Equals(id));
         }
 
+        public Client Get(Func<Client, bool> filter)
+        {
+            return _clients.FirstOrDefault(filter);
+        }
+
         public Task Update(Client entity)
         {
             throw new NotImplementedException();

@@ -1,10 +1,13 @@
 ﻿using Business.Discrete;
 using Data.Entity;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Presentation.Controllers
 {
     [Route("[controller]")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Policy = "CustomAccessPolicy", Roles = "Client")]
     [ApiController]
     public class ClientController : ControllerBase
     {
