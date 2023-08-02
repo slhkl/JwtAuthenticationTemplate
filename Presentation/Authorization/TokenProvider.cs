@@ -8,7 +8,7 @@ namespace Presentation.Authorization
 {
     public class TokenProvider
     {
-        public readonly byte[] key = Encoding.UTF8.GetBytes("generatejwttokenwiththiskeyword");
+        public readonly byte[] key = Encoding.UTF8.GetBytes("generatejwttokenwiththiskeywordforthisexample");
 
         public readonly string issuer = "Salih";
 
