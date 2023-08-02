@@ -6,7 +6,7 @@ using Presentation.Authorization;
 
 namespace Presentation.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class LoginController : ControllerBase
     {
@@ -20,7 +20,7 @@ namespace Presentation.Controllers
             _customerService = customerService;
         }
 
-        [HttpPost("Login")]
+        [HttpPost]
         public IActionResult Login(LoginDto loginDto)
         {
             var client = _clientService.Get(c => c.Email.Equals(loginDto.Email) && c.Password.Equals(loginDto.Password));
