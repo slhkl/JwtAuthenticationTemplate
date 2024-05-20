@@ -1,4 +1,5 @@
-﻿using Business.Concrete.Services;
+﻿using Business.Concrete.Model;
+using Business.Concrete.Services;
 using Business.Discrete;
 using Data.Entity;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -15,6 +16,8 @@ namespace Presentation.Configuration
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseCors("CorsPolicy");
+
+            app.UseMiddleware<RequestMiddleware>();
         }
 
         public static void AddServices(this IServiceCollection services)
@@ -28,8 +31,10 @@ namespace Presentation.Configuration
 
         private static IServiceCollection AddIocImports(this IServiceCollection services)
         {
-            services.AddSingleton<IService<Customer>, CustomerService>();
-            services.AddSingleton<IService<Client>, ClientService>();
+            services.AddScoped<IService<Customer>, CustomerService>();
+            services.AddScoped<IService<Client>, ClientService>();
+
+            services.AddScoped<RequestMiddlewareModel>();
 
             return services;
         }

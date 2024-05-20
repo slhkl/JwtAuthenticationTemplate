@@ -26,14 +26,14 @@ namespace Presentation.Authorization
             }
         }
 
-        public string CreateToken(LoginDto loginDto)
+        public string CreateToken(UserDto user)
         {
             var claims = new[]
             {
-                new Claim(ClaimTypes.NameIdentifier, loginDto.Id.ToString()),
-                new Claim(ClaimTypes.Name, loginDto.Name),
-                new Claim(ClaimTypes.Email,loginDto.Email),
-                new Claim(ClaimTypes.Role, loginDto.Role),
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                new Claim(ClaimTypes.Name, user.Name),
+                new Claim(ClaimTypes.Email,user.Email),
+                new Claim(ClaimTypes.Role, user.Role),
             };
 
             var securityKey = new SymmetricSecurityKey(key);

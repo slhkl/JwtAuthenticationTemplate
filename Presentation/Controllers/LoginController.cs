@@ -23,26 +23,30 @@ namespace Presentation.Controllers
         [HttpPost]
         public IActionResult Login(LoginDto loginDto)
         {
+            var user = new UserDto();
+
             var client = _clientService.Get(c => c.Email.Equals(loginDto.Email) && c.Password.Equals(loginDto.Password));
 
             if (client != null)
             {
-                loginDto.Id = client.Id;
-                loginDto.Name = client.Name;
-                loginDto.Role = "Client";
+                user.Id = client.Id;
+                user.Name = client.Name;
+                user.Role = "Client";
+                user.Email = client.Email;
 
-                return Ok(TokenProvider.Instance.CreateToken(loginDto));
+                return Ok(TokenProvider.Instance.CreateToken(user));
             }
 
             var customer = _customerService.Get(c => c.Email.Equals(loginDto.Email) && c.Password.Equals(loginDto.Password));
 
             if (customer != null)
             {
-                loginDto.Id = customer.Id;
-                loginDto.Name = customer.Name;
-                loginDto.Role = "Customer";
+                user.Id = customer.Id;
+                user.Name = customer.Name;
+                user.Role = "Customer";
+                user.Email = customer.Email;
 
-                return Ok(TokenProvider.Instance.CreateToken(loginDto));
+                return Ok(TokenProvider.Instance.CreateToken(user));
             }
 
             return Unauthorized();
