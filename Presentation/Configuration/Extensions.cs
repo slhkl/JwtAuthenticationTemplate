@@ -83,6 +83,7 @@ namespace Presentation.Configuration
                         IssuerSigningKey = new SymmetricSecurityKey(TokenProvider.Instance.key),
                         ValidateIssuer = true,
                         ValidateAudience = true,
+                        ValidateIssuerSigningKey = true,
                         ValidateLifetime = true,
                     };
                     opt.SaveToken = true;
